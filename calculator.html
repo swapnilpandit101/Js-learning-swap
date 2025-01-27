@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+       
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .display{
+        height: 100px;
+        width: 100%;
+     
+      }
+      button{
+        background-color: cornflowerblue;
+        font-weight: bolder;
+        height: 40px;
+        width: 32px;
+        border: 1px solid black;
+        border-radius: 3px;
+        margin:  8px;
+      }
+
+      .calculator {
+        background-color: lightblue;
+        height: 450px;
+        width: 300px;
+        padding: 20px;
+        border-radius: 10px;
+       
+      }
+    </style>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Simple Calculator</title>
+        <link rel="stylesheet" href="styles.css" />
+      </head>
+      <body>
+
+
+        <div class="calculator container-fluid">
+        <!-- row 1 -->
+        <div class="row">
+          <div class="col-12">
+            <input id="display" type="text" class="display bg-light" disabled />
+          </div>
+        </div>
+
+        <!-- row 2 -->
+        <div class="row ">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('1')">1</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('2')">2</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('3')">3</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('+')">+</button></div>
+        </div>
+
+        <!-- row 3 -->
+        <div class="row ">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('4')">4</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('5')">5</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('6')">6</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('-')">-</button></div>
+        </div>
+
+        <!-- row 4 -->
+        <div class="row ">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('7')">7</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('8')">8</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('9')">9</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('*')">*</button></div>
+        </div>
+
+        <!-- row 5 -->
+        <div class="row ">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('0')">0</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('.')">.</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="clearDisplay('1')">C</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3"> <button onclick="onDisplay('/')">/</button></div>
+        </div>
+
+        <!-- breaking line -->
+        <div class="container" style="height: 1px;width: 100%; border: 1px solid black;"></div>
+
+        <!-- row 5 -->
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3 mx-auto"> <button onclick="result()">=</button></div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3 mx-auto"> <button id="delBut" >X</button></div>
+          
+        </div>
+        </div>
+
+
+
+        <!-- Js logic started here -->
+        <script>
+
+         // created a global variable display and stored the id of input field whose id is display
+         let display = document.getElementById('display');
+
+
+          // after clicking digit button and arithmatic operators onDisplay method works and show clicked button on display
+          function onDisplay(value) {
+            display.value = display.value + value;
+            display.style.color= "black"
+           }
+
+          //  clear display functionality after clicking C button
+           function clearDisplay() {
+           display.value = '';
+           }
+          
+           // after clicking x button single digit should be deleted 
+           document.getElementById('delBut').addEventListener('click', function() 
+           {
+            display.value = display.value.slice(0, -1);
+            });
+
+           function result() 
+           {
+           display.value = eval(display.value);
+           }
+
+        </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

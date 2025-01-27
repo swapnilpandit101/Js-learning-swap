@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    
+   <style>
+*{
+  padding: 0;
+  margin: 0;
+}
+   </style>
+  </head>
+  <body>
+    <h1 style="text-align: center; color: blue;">Crud Operation Product Management System</h1>
+    <div class="container">
+      
+      <div class="row">
+        
+        <div class="col-lg-6 col-md-6 col-sm-6 col-12 bg-success mt-3">
+          <h1>Product Management Form</h1> <br> <br>
+          <form id="productForm">
+            <div class="mb-2">
+              <label for="productCode" class="form-label">Product Code:-</label>
+              <input
+                type="text"
+                id="productCode"
+                class="form-control"
+                placeholder="Product Code"
+                required
+              />
+            </div>
+          
+            <div class="mb-2">
+              <label for="productName" class="form-label">Product Name:-</label>
+              <input
+                type="text"
+                id="productName"
+                class="form-control"
+                placeholder="Product Name"
+                required
+              />
+            </div>
+          
+            <div class="mb-2">
+              <label for="productQuantity" class="form-label">Product Quantity:-</label>
+              <input
+                type="number"
+                id="productQuantity"
+                class="form-control"
+                placeholder="Product Quantity"
+                required
+              />
+            </div>
+          
+            <div class="mb-2">
+              <label for="productPrice" class="form-label">Product Price:-</label>
+              <input
+                type="number"
+                id="productPrice"
+                class="form-control"
+                placeholder="Product Price"
+                required
+              />
+            </div>
+          
+            <button type="button" class="btn btn-primary" onclick="addProduct()">
+              Submit
+            </button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+          </form>
+          
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-12 bg-warning mt-3"">
+          <h1>Product Management Table</h1> <br> <br>
+          <table id="productTable" class="table table-striped table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const table = document.querySelector("#productTable tbody");
+      let products = [];
+      let editIndex = -1; // To track the row being edited.
+    
+      // Add new product or update existing product
+      function addProduct() {
+        const code = document.getElementById("productCode").value;
+        const name = document.getElementById("productName").value;
+        const quantity = document.getElementById("productQuantity").value;
+        const price = document.getElementById("productPrice").value;
+    
+        if (!code || !name || !quantity || !price) {
+          alert("Please fill in all fields.");
+          return;
+        }
+    
+        const product = { code, name, quantity, price };
+    
+        if (editIndex === -1) {
+          // Add new product if not in edit mode
+          products.push(product);
+        } else {
+          // Update existing product
+          products[editIndex] = product;
+          editIndex = -1; // Reset edit index after updating
+        }
+    
+        renderTable();
+        document.getElementById("productForm").reset();
+      }
+    
+      // Render the product list in the table
+      function renderTable() {
+        table.innerHTML = ""; // Clear existing rows
+        products.forEach((product, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${product.code}</td>
+            <td>${product.name}</td>
+            <td>${product.quantity}</td>
+            <td>${product.price}</td>
+            <td>
+              <button onclick="editProduct(${index})" class="bg-info">Edit</button>
+              <button onclick="deleteProduct(${index})" class="bg-light">Delete</button>
+            </td>
+          `;
+          table.appendChild(row);
+        });
+                              }
+    
+      // Edit product data (populate the form)
+      function editProduct(i) {
+        const product = products[i];
+        document.getElementById("productCode").value = product.code;
+        document.getElementById("productName").value = product.name;
+        document.getElementById("productQuantity").value = product.quantity;
+        document.getElementById("productPrice").value = product.price;
+    
+        editIndex = i; // Set the index of the row being edited
+                               }
+    
+      // Delete product from the list
+      function deleteProduct(i) {
+        products.splice(i, 1); // Remove product from the array
+        renderTable(); // Re-render the table after deletion
+                                }
+    
+    </script>
+    
+    
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
